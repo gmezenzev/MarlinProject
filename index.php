@@ -1,15 +1,4 @@
 <?php
-$posts = [
-    ["title" => "название 1ой статьи",
-        "desc" => "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
-    ],
-    ["title" => "название 2ой статьи",
-        "desc" => "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
-    ],
-    ["title" => "название 3ой статьи",
-        "desc" => "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
-    ]
-];
 
 $pdo = new PDO('mysql:host=localhost;dbname=MarlinProject', 'root', 'root');
 $statement = $pdo->query("SELECT name, description FROM posts  ");
@@ -41,12 +30,15 @@ $posts = $statement->fetchAll(PDO:: FETCH_ASSOC);
                 <h2><?php echo $post["name"] ?></h2>
                 <p><?php echo $post["description"] ?></p>
                 <a href="#">Читать далее</a>
+                <form action="delete.php">
+                    <button> Удалить</button>
+                </form>
             </div>
         <?php endforeach; ?>
     </div>
     <hr>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <h4>Добавление статьи</h4>
             <form action="create.php" method="POST">
                 <input type="text" name="name" placeholder="Добавьте заголовок статьи"><br><br>
@@ -54,13 +46,14 @@ $posts = $statement->fetchAll(PDO:: FETCH_ASSOC);
                 <input type="submit" value="Добавить статью">
             </form>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <h4>Удаление статьи</h4>
             <form action="delete.php" method="POST">
                 <input type="text" name="name" placeholder="Введите заголовок статьи"><br><br>
                 <input type="submit" value="Удалить статью">
             </form>
         </div>
+
     </div>
 
 
