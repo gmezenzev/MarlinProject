@@ -7,7 +7,10 @@
  */
 if (isset($_POST['name'])) $name = $_POST['name'];
 if (isset($_POST['description'])) $description = $_POST['description'];
-$pdo = new PDO('mysql:host=localhost;dbname=MarlinProject', 'root', 'root');
+$pdo = new PDO('mysql:host=localhost;dbname=MarlinProject;charset=utf8',
+    'root',
+    'root',
+    array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''));
 $statement = $pdo->prepare("INSERT INTO posts (name,description)  VALUES ('$name','$description')");
 $statement->execute();
 if (isset($statement)) $message = 'Статья успешно создана';

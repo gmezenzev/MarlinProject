@@ -4,7 +4,10 @@ $editpost = $_POST['editpost'];
 if (isset($_POST['id'])) $id = $_POST['id'];
 else if (isset($_POST['editpostpost'])) $id = $_POST['editpostpostt'];
 else echo 'нет ID';
-$pdo = new PDO('mysql:host=localhost;dbname=MarlinProject', 'root', 'root');
+$pdo = new PDO('mysql:host=localhost;dbname=MarlinProject;charset=utf8',
+    'root',
+    'root',
+    array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''));
 $statement = $pdo->query("SELECT * FROM posts WHERE id = '$id' ");
 $posts = $statement->fetchAll(PDO:: FETCH_ASSOC);
 ?>

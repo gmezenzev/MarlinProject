@@ -13,7 +13,10 @@
 if (isset($_POST['id'])) $id = $_POST['id'];
 else if (isset($_POST['deletepost'])) $id = $_POST['deletepost'];
 else echo 'нет ID';
-$pdo = new PDO('mysql:host=localhost;dbname=MarlinProject', 'root', 'root');
+$pdo = new PDO('mysql:host=localhost;dbname=MarlinProject;charset=utf8',
+    'root',
+    'root',
+    array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''));
 $count = $pdo->exec("DELETE FROM posts WHERE id='$id'");
 if ($count == 0) $message = 'Такой статьи нет в базе';
 else $message = 'Статья успешно удалена';
