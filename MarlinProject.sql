@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 07, 2019 at 01:34 PM
+-- Generation Time: Feb 11, 2019 at 01:58 PM
 -- Server version: 5.7.23
 -- PHP Version: 7.2.10
 
@@ -27,20 +27,41 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `posts` (
+  `id` int(11) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
-  `description` varchar(255) NOT NULL
+  `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`name`, `description`) VALUES
-('название 1ой статьи', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'),
-('название 2ой статьи', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'),
-('название 3ой статьи', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'),
-('название 4ой статьи', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'),
-('название 5ой статьи', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.');
+INSERT INTO `posts` (`id`, `name`, `description`) VALUES
+(3, 'Статья №1', 'PHP позволяет делать для сайта многое интересное. Но уйма сайтов взломана из-за того же PHP. Либо выставляются неправильные права доступа к файлам, либо неправильно написаны скрипты работы с файлами, либо из-за ошибок в работе скрипта возможно посмотреть структуру каталогов сайта и т.д.'),
+(4, 'Статья №2', 'PHP позволяет делать для сайта многое интересное. Но уйма сайтов взломана из-за того же PHP. Либо выставляются неправильные права доступа к файлам, либо неправильно написаны скрипты работы с файлами, либо из-за ошибок в работе скрипта возможно посмотреть структуру каталогов сайта и т.д.'),
+(7, 'Статья №3', 'PHP позволяет делать для сайта многое интересное. Но уйма сайтов взломана из-за того же PHP. Либо выставляются неправильные права доступа к файлам, либо неправильно написаны скрипты работы с файлами, либо из-за ошибок в работе скрипта возможно посмотреть структуру каталогов сайта и т.д.'),
+(8, 'Статья №4', 'PHP позволяет делать для сайта многое интересное. Но уйма сайтов взломана из-за того же PHP. Либо выставляются неправильные права доступа к файлам, либо неправильно написаны скрипты работы с файлами, либо из-за ошибок в работе скрипта возможно посмотреть структуру каталогов сайта и т.д.'),
+(10, 'Статья №5', 'PHP позволяет делать для сайта многое интересное. Но уйма сайтов взломана из-за того же PHP. Либо выставляются неправильные права доступа к файлам, либо неправильно написаны скрипты работы с файлами, либо из-за ошибок в работе скрипта возможно посмотреть структуру каталогов сайта и т.д.');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `posts`
+--
+ALTER TABLE `posts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `posts`
+--
+ALTER TABLE `posts`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

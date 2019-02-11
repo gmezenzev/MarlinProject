@@ -1,7 +1,7 @@
 <?php
 
 $pdo = new PDO('mysql:host=localhost;dbname=MarlinProject', 'root', 'root');
-$statement = $pdo->query("SELECT name, description FROM posts  ");
+$statement = $pdo->query("SELECT * FROM posts  ");
 $posts = $statement->fetchAll(PDO:: FETCH_ASSOC);
 
 
@@ -26,13 +26,21 @@ $posts = $statement->fetchAll(PDO:: FETCH_ASSOC);
     </div>
     <div class="row">
         <?php foreach ($posts as $post): ?>
-            <div class="col-md-4">
+            <div class="col-md-4 ">
                 <h2><?php echo $post["name"] ?></h2>
                 <p><?php echo $post["description"] ?></p>
                 <a href="#">Читать далее</a>
-                <form action="delete.php">
-                    <button> Удалить</button>
-                </form>
+                <div class="d-flex justify-content-around">
+                    <form action="delete.php" method="POST">
+                        <input type="hidden" value="<?php echo $post["id"] ?>" name="id">
+                        <input type="submit" value="Удалить">
+                    </form>
+                    <form action="edit.php" method="POST">
+                        <input type="hidden" value="<?php echo $post["id"] ?>" name="id">
+                        <input type="submit" value="Редактировать">
+                    </form>
+                </div>
+
             </div>
         <?php endforeach; ?>
     </div>
@@ -48,9 +56,26 @@ $posts = $statement->fetchAll(PDO:: FETCH_ASSOC);
         </div>
         <div class="col-md-4">
             <h4>Удаление статьи</h4>
-            <form action="delete.php" method="POST">
-                <input type="text" name="name" placeholder="Введите заголовок статьи"><br><br>
-                <input type="submit" value="Удалить статью">
+            <form action="delete.php" method="post">
+                <select size="1" name="deletepost" required>
+                    <option value="1" disabled>Выберите статью</option>
+                    <?php foreach ($posts as $post): ?>
+                        <option value="<?php echo $post["id"] ?>"><?php echo $post["name"] ?></option>
+                    <?php endforeach; ?>
+                </select><br><br>
+                <input type="submit" value="Удалить">
+            </form>
+        </div>
+        <div class="col-md-4">
+            <h4>Правка статьи</h4>
+            <form action="edit.php" method="post">
+                <select size="1" name="editpost" required>
+                    <option value="1" disabled>Выберите статью</option>
+                    <?php foreach ($posts as $post): ?>
+                        <option value="<?php echo $post["id"] ?>"><?php echo $post["name"] ?></option>
+                    <?php endforeach; ?>
+                </select><br><br>
+                <input type="submit" value="Открыть">
             </form>
         </div>
 

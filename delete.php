@@ -5,12 +5,18 @@
  * Date: 06/02/2019
  * Time: 22:22
  */
-if (isset($_POST['name'])) $name = $_POST['name'];
+//if (isset($_POST['name'])) $name = $_POST['name'];
+//$pdo = new PDO('mysql:host=localhost;dbname=MarlinProject', 'root', 'root');
+//$count = $pdo->exec("DELETE FROM posts WHERE name='$name'");
+//if ($count == 0) $message = 'Такой статьи нет в базе';
+//else $message = 'Статья успешно удалена';
+if (isset($_POST['id'])) $id = $_POST['id'];
+else if (isset($_POST['deletepost'])) $id = $_POST['deletepost'];
+else echo 'нет ID';
 $pdo = new PDO('mysql:host=localhost;dbname=MarlinProject', 'root', 'root');
-$statement = $pdo->query("DELETE FROM posts WHERE name='$name'");
-var_dump($statement);
-if (isset($statement)) $message = 'Статья успешно удалена';
-else $message = 'Не удалось удалить статью ';
+$count = $pdo->exec("DELETE FROM posts WHERE id='$id'");
+if ($count == 0) $message = 'Такой статьи нет в базе';
+else $message = 'Статья успешно удалена';
 ?>
 
 <!doctype html>

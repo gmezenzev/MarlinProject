@@ -1,17 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: gleb
- * Date: 06/02/2019
- * Time: 00:37
- */
-if (isset($_POST['name'])) $name = $_POST['name'];
-if (isset($_POST['description'])) $description = $_POST['description'];
+$editpost = $_POST['editpost'];
+
+if (isset($_POST['id'])) $id = $_POST['id'];
+else if (isset($_POST['editpostpost'])) $id = $_POST['editpostpostt'];
+else echo 'нет ID';
 $pdo = new PDO('mysql:host=localhost;dbname=MarlinProject', 'root', 'root');
-$statement = $pdo->prepare("INSERT INTO posts (name,description)  VALUES ('$name','$description')");
-$statement->execute();
-if (isset($statement)) $message = 'Статья успешно создана';
-else $message = 'Не удалось создать статью ';
+$statement = $pdo->query("SELECT * FROM posts WHERE id = '$id' ");
+$posts = $statement->fetchAll(PDO:: FETCH_ASSOC);
 ?>
 
 <!doctype html>
@@ -28,9 +23,16 @@ else $message = 'Не удалось создать статью ';
 <body>
 
 <div class="container">
-    <div class="alert alert-info" role="alert">
-        <strong><?php echo $message?></strong>
+    <div class="row">
+        <h1>Редактирование статьи</h1>
     </div>
+    <form action="update.php" method="POST">
+        <input type="text" name="name"  value="<?=$posts[0]['name']?>"><br><br>
+        <input type="hidden" value="<?= $posts[0]['id'] ?>" name="id">
+        <textarea name="description" id="" cols="100" rows="10" ><?=$posts[0]['description']?></textarea><br><br>
+        <input type="submit" value="Сохранить  статью">
+    </form>
+    <br>
     <a href="index.php"><button type="button" class="btn btn-primary btn-lg">НАЗАД К СТАТЬЯМ</button></a>
 </div>
 </body>
