@@ -1,14 +1,10 @@
 <?php
 
-$pdo = new PDO('mysql:host=localhost;dbname=MarlinProject;charset=utf8',
-    'root',
-    'root',
-    array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''));
+require ('connect.php');
 $statement = $pdo->query("SELECT * FROM posts  ");
 $posts = $statement->fetchAll(PDO:: FETCH_ASSOC);
-
-
 ?>
+
 
 <!doctype html>
 <html lang="en">
@@ -24,6 +20,20 @@ $posts = $statement->fetchAll(PDO:: FETCH_ASSOC);
 <body>
 
 <div class="container">
+    <?php if (isset($_SESSION['logged_user'])) : ?>
+            <div class="alert alert-success" role="alert"><?= $_SESSION['logged_user']?>, Вы авторизованы</div>
+            <a href="logout.php" class="btn btn-lg btn-outline-primary btn-block">Выйти</a>
+    <?php else :?>
+            <form class="form-signin" >
+                <a href="login.php" class="btn btn-lg btn-outline-primary btn-block">Войти</a>
+                <a href="signup.php" class="btn btn-lg btn-outline-primary btn-block">Зарегистрироваться</a>
+            </form>
+    <?php endif; ?>
+
+
+
+
+
     <div class="row">
         <h1>Мои статьи</h1>
     </div>

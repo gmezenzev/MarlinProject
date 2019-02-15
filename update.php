@@ -8,10 +8,7 @@
 if (isset($_POST['name'])) $name = $_POST['name'];
 if (isset($_POST['description'])) $description = $_POST['description'];
 if (isset($_POST['id'])) $id = $_POST['id'];
-$pdo = new PDO('mysql:host=localhost;dbname=MarlinProject;charset=utf8',
-    'root',
-    'root',
-    array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''));
+require ('connect.php');
 //$statement = $pdo->query("UPDATE  posts SET description='$description' WHERE id='$id' ");
 
 $count = $pdo->exec("UPDATE  posts SET description='$description', name='$name' WHERE id='$id'");
