@@ -5,10 +5,13 @@
  * Date: 06/02/2019
  * Time: 00:37
  */
+error_reporting(-1);
+ini_set('display_errors', 'On');
+require('connect.php');
 if (isset($_POST['name'])) $name = $_POST['name'];
 if (isset($_POST['description'])) $description = $_POST['description'];
-require ('connect.php');
-$statement = $pdo->prepare("INSERT INTO posts (name,description)  VALUES ('$name','$description')");
+$userId = $_SESSION['logged_user_id'];
+$statement = $pdo->prepare("INSERT INTO posts (name,description,id_author)  VALUES ('$name','$description', '$userId')");
 $statement->execute();
 if (isset($statement)) $message = 'Статья успешно создана';
 else $message = 'Не удалось создать статью ';

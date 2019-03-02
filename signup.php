@@ -73,13 +73,13 @@ if (isset($_POST['signup'])) {
             <div class="alert alert-success" role="alert"><?= $massage; ?></div>
         <?php endif; ?>
         <input type="text" name="username" class="form-control" placeholder="введите логин"
-               value="<?= @$_POST['username']; ?>">
+               value="<?php if (isset($_POST['username'])) echo $_POST['username']; ?>">
         <input type="email" name="email" class="form-control" placeholder="введите email"
-               value="<?= @$_POST['email']; ?>">
+               value="<?php if (isset($_POST['email'])) echo $_POST['email']; ?>">
         <input type="password" name="password1" class="form-control" placeholder="введите пароль"
-               value="<?= @$_POST['password1']; ?>">
+               value="<?php if (isset($_POST['password1'])) echo $_POST['password1']; ?>">
         <input type="password" name="password2" class="form-control" placeholder="введите пароль еще раз"
-               value="<?= @$_POST['password2']; ?>" required>
+               value="<?php if (isset($_POST['password2'])) echo $_POST['password2']; ?>" required>
         <button class="btn btn-lg btn-primary btn-block" name="signup" type="submit">Зарегистрироваться</button>
         <a href="login.php" class="btn btn-lg btn-outline-primary btn-block">Войти</a>
     </form>

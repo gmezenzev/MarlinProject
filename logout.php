@@ -6,5 +6,5 @@
  * Time: 20:08
  */
 require ('connect.php');
-unset($_SESSION['logged_user']);
+unset($_SESSION['logged_user_id']);
 header('location: index.php' );
